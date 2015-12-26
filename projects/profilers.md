@@ -6,7 +6,7 @@ Your goal in this project is to build two different kinds of profilers. The firs
 
 ## Sampling profiler
 
-You must create a Java agent with a premain method that creates a sampling thread that wakes up every 1ms (the fastest Java letters do this I believe). At each clock tick, it must figure out the method in which the main thread is currently executing. To do that, it must look at the stack trace of the main thread and filter out anything on the top of the stack that is in the Java library. To get that stack trace, it must find the main thread. (Here is some code that finds all the threads in the system) You can learn more about java agents. You might find java.lang.instrument api useful.
+You must create a Java agent with a premain method that creates a sampling thread that wakes up every 1ms. At each clock tick, it must figure out the method in which the main thread is currently executing. To do that, it must look at the stack trace of the main thread and filter out anything on the top of the stack that is in the Java library. To get that stack trace, it must find the main thread. Here is some [code that finds all the threads in the system](http://www.coderanch.com/how-to/java/ThreadLister). You can learn more about [java agents](http://dhruba.name/2010/02/07/creation-dynamic-loading-and-instrumentation-with-javaagents/). You might find [java.lang.instrument](http://docs.oracle.com/javase/7/docs/api/java/lang/instrument/package-summary.html) api useful.
 
 You need to count how many times your sampler awakens in each method. From that, we can determine a relative ratio of how much time is spent in each method. We won't know the amount of time per se, but we know relatively speaking which ones take the most time because we awaken most often in. I suggest you do something like the following to track:
 
@@ -14,7 +14,7 @@ You need to count how many times your sampler awakens in each method. From that,
 FrequencySet<String> samples = new FrequencySet<String>();
 ```
 
-If you look at the attachments on this page, you will find that class available to you as a convenience. (Still can't believe these sorts of things aren't in the standard library.)
+ANTLR's tool lib has [FrequencySet.java](https://github.com/antlr/antlr4/blob/master/tool/src/org/antlr/v4/misc/FrequencySet.java) and a [MutableInt.java](https://github.com/antlr/antlr4/blob/master/tool/src/org/antlr/v4/misc/MutableInt.java) as a convenience.
 
 In order to print out the profiling information, you will need the following method: Runtime.addShutdownHook(). You can use that to execute code as the JVM is shutting down.
 
@@ -62,7 +62,7 @@ long startTime = System.nanoTime();
 long estimatedTime = System.nanoTime() - startTime;
 ```
 
-In order to do the bytecode transformations, you need to read ASM transformations. Also you should use ASMifier so you don't have to figure out all the library method calls. Still, I found getting this thing to work kind of tricky. ASM's use of visitors to visit and to generate I found to be profoundly unintuitive.
+In order to do the bytecode transformations, you need to read [ASM transformations](http://asm.ow2.org/current/asm-transformations.pdf). Also you should use ASMifier so you don't have to figure out all the library method calls. Still, I found getting this thing to work kind of tricky. ASM's use of visitors to visit and to generate I found to be profoundly unintuitive.
 
 To ensure that your "method exit" code actually executes, you must enclose the method in a try-finally:
 

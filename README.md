@@ -43,7 +43,7 @@ Unfortunately the more useful book, [Language Implementation Patterns](http://am
 | Artifact | Grade Weight | Due date |
 |--------|--------|--------|
 |[Java REPL](https://github.com/parrt/cs652/blob/master/projects/Java-REPL.md)| 5%| Feb 4 |
-|[Java sampling and tracing profilers](https://github.com/parrt/cs345/blob/master/projects/profilers.md)| 10%| Feb 4 |
+|[Java sampling and tracing profilers](projects/profilers.md)| 10%| Feb 4 |
 |[C declaration to English translator]() | 10% | |
 |[malloc/free (C)]() | 10% | |
 |[Virtual Machine (C)]() | 10% | |
