@@ -26,7 +26,7 @@ CS245 is required background and is critical to the successful completion of the
 
 **TIME.** TR 12:45pm - 2:30pm,  January 26 (Tue) - May 12 (Thu).
 
-**EXAMS.** There will be 3 exams but no final exam.
+**EXAMS.** There will be 2 exams and 1 final exam.
 
 ### Instruction Format
 
@@ -50,11 +50,11 @@ Unfortunately the more useful book, [Language Implementation Patterns](http://am
 |Quizzes | 5%| sporadic |
 |Exam 1| 15%| Mon, March 30 |
 |Exam 2| 15%| Wed, May 13 |
-|Exam 2| 15%| |
+|Final exam| 20%| Thu, May 19 @ 12:30 PM-2:30 PM|
 
 *I expect to see proper git commit messages and github usage so I can track your development.*
 
-I consider an "A" grade to be above and beyond what most students have achieved. A "B" grade is an average grade for a graduate student or what you could call "competence" in a business setting. A "C" grade means that you either did not or could not put forth the effort to achieve competence. An "F" grade implies you did very little work or had great difficulty with the class compared to other students.
+I consider an "A" grade to be above and beyond what most students have achieved. A "B" grade is an average grade for a student or what you could call "competence" in a business setting. A "C" grade means that you either did not or could not put forth the effort to achieve competence. An "F" grade implies you did very little work or had great difficulty with the class compared to other students.
 
 Projects must run exactly as specified. Make sure that you do not have hardcoded files/directories in your code, remember that UNIX is case-sensitive as is Java, file names and class names must be correct, specified method signatures must be correct, etc...
 
@@ -79,34 +79,105 @@ My policy is as follows:
 
 If you ever have questions about what constitutes plagiarism, cheating, or academic dishonesty in my course, please feel free to ask me. I’m happy to discuss the issue in a forthright manner.
 
-Official text from USF: *As a Jesuit institution committed to cura personalis—the care and education of the whole person—USF has an obligation to embody and foster the values of honesty and integrity. USF upholds the standards of honesty and integrity from all members of the academic community. All students are expected to know and adhere to the University's Honor Code. You can find the full text of the code [online](http://www.usfca.edu/catalog/policies/honor).*
+**Note:** Leaving your laptop unattended is a common means for another student to take your work. It is your responsibility to guard your work. Do not leave your printouts laying around or in the trash. *All persons with common code are likely to be considered at fault.*
+
+**Official text from USF**: *As a Jesuit institution committed to cura personalis—the care and education of the whole person—USF has an obligation to embody and foster the values of honesty and integrity. USF upholds the standards of honesty and integrity from all members of the academic community. All students are expected to know and adhere to the University's Honor Code. You can find the full text of the code [online](http://www.usfca.edu/catalog/policies/honor).*
 
 **ON DISABILITIES.** If you are a student with a disability or disabling condition, or if you think you may have a disability, please contact USF Student Disability Services (SDS) at 415/422-2613 within the first week of class, or immediately upon onset of the disability, to speak with a disability specialist. If you are determined eligible for reasonable accommodations, please meet with your disability specialist so they can arrange to have your accommodation letter sent to me, and we will discuss your needs for this course. For more information, please visit http://www.usfca.edu/sds/ or call 415/422-2613.
 
 ## Syllabus
 
-### Executing programs, evolution of program languages
+### Introduction
 
-### Programming paradigms
+* Overview of program execution
+ * preprocessors
+ * lexical, syntactic analysis
+ * semantic analysis
+ * code gen
+ * virtual machines, interpretation
+* Evolution of program languages
+* Categorizing languages
+ * general, scripting, DSLs, data languages
+ * compiled, interpreted, static/dynamic typing, strong/weak typing
 
-* [Functional programming and other fun stuff in Python](https://github.com/parrt/cs652/blob/master/lectures/functional-python.md)
-* Object-oriented programming, [vtable impl](https://github.com/parrt/cs652/blob/master/projects/Java-vtable.md)
-* Java generics
-* SQL
+PART I -- Static analysis
+<hr>
 
-### Parsing and grammars
+### Language recognition
 
-### Symbol tables and static typing
+* Lexical analysis
+  * regex
+  * NFA, DFA
+* Parsing
+  * grammars (CFG, ANTLR)
+  * syntax diagrams
+  * derivations
+  * parse trees
+  * ASTs
+  * top-down/recursive-descent, bottom-up
+  * pushdown machines
+  * grammar classes; LL(k), LR(k), ALL(*)
+* Walking trees; listeners, visitors
+
+### Type systems
+
+* Evolution
+* Common types: boolean, numerics, strings (unicode), aggregates, enums; memory layout
+* Object-oriented semantics
+	* classes, instances
+	* inheritance, overriding vs overloading
+	* interfaces
+	* dynamic binding, [vtable implementation](https://github.com/parrt/cs652/blob/master/projects/Java-vtable.md)
+* type checking, equivalence, compatibility
+* type inference
+
+### Symbol tables
+
+* use/def sites (binding/resolution)
+* packages
+* lexical scopes: global, function, local, aggregate
+* imports/uses
+* representing types; type system's effect on name resolution
+* implementation [see antlr/symtab repo](https://github.com/antlr/symtab)
+  * elements
+  * scope trees
+  * [example](https://github.com/parrt/cs652/tree/master/lectures/code/symtab/src)
+
+PART II -- Runtime support
+<hr>
 
 ### Memory management
 
-* malloc/free
+* dynamic memory allocation
+  * stack
+  * malloc/free
 * automatic garbage collection
-
-Bridging languages
+  * mark-and-sweep
+  * mark-and-compact
+  * generational
 
 ### Virtual Machines
 
-### Immutable/persistent data structures
+* tree-based interpreters
+* bytecode machines
+   * memory models, constant pools
+   * instruction format
+   * stack machines
+   * register machines
+   * function call, args, return values
 
-### Threads
+### Concurrency in Java
+
+* Launching
+* Shared memory model
+* Communication and synchronization
+* Lockless data structures
+
+### Advanced language features, paradigms
+
+* [Functional programming and other fun stuff in Python](https://github.com/parrt/cs652/blob/master/lectures/functional-python.md)
+* Immutable/persistent data structures
+* Java generics
+* Java closures
+* SQL
+* Bridging languages
