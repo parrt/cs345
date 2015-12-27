@@ -62,8 +62,6 @@ long startTime = System.nanoTime();
 long estimatedTime = System.nanoTime() - startTime;
 ```
 
-In order to do the bytecode transformations, you need to read [ASM transformations](http://asm.ow2.org/current/asm-transformations.pdf). Also you should use ASMifier so you don't have to figure out all the library method calls. Still, I found getting this thing to work kind of tricky. ASM's use of visitors to visit and to generate I found to be profoundly unintuitive.
-
 To ensure that your "method exit" code actually executes, you must enclose the method in a try-finally:
 
 ```java
@@ -78,7 +76,7 @@ finally {
 
 The Java code could execute a return instruction anywhere within the method. This will force your code to execute.
 
-As part of your tracing profiler, you must also track the number of objects of each type that are created. In this case, it makes sense to instrument java.* classes so that you pick up things like String. That means, for each new X(...) expression in any method, you should add code to increment a count for that particular object. This will be tricky because you must make sure that the code you insert does not mess up the expression surrounding the new. For example, if you see new X().go(), your instrumentation code will either have to go in front of the expression or after the new finishes but before the go method call. You could also do the count after go(), but it would change the order in which you record things since that method call could create other objects.
+As part of your tracing profiler, you must also track the number of objects of each type that are created. In this case, it makes sense to instrument `java.*` classes so that you pick up things like String. That means, for each new X(...) expression in any method, you should add code to increment a count for that particular object. This will be tricky because you must make sure that the code you insert does not mess up the expression surrounding the new. For example, if you see new X().go(), your instrumentation code will either have to go in front of the expression or after the new finishes but before the go method call. You could also do the count after go(), but it would change the order in which you record things since that method call could create other objects.
 
 You will need a map from pkg.class -> count of objects.
 
@@ -103,23 +101,6 @@ java.lang.String 23009
 ...
 ```
 
-## Java agents
-
-All of our work will be done using agents so that our profilers are as unobtrusive as possible. Agents make it possible to instrument or observe programs during execution without having to modify those programs and without having source code for them. For example, here is how I launched my sampling profiler on class SomeTestProgram:
-
-```bash
-$ java -javaagent:sampler.jar SomeTestProgram
-```
-
-That sampler.jar has to have a manifest file that indicates what the agent class is. Since we are using premain() method, we need to specify Premain-Class:
-
-```bash
-$ cat META-INF/MANIFEST.MF 
-Premain-Class: tracer.TestAgent
-```
-
-When you jar up your code, make sure that you include the META-INF directory and the manifest file underneath.
-
 ## Deliverables
 
 Please put your code in package `sampler` and `tracer`.
@@ -137,51 +118,3 @@ java -javaagent:tracer.jar SomeTestProgram
 where SomeTestProgram must have a main method. The agent from the jars, identified by the Premain-Class property in the manifest file, will execute before the SomeTestProgram main method runs. This gives your agent an opportunity to rewrite the bytecodes or do whatever else you need to initialize your system.
 
 ## Submission
-
-
-## Resources
-
-```java
-package sampler;
-
-import java.util.Hashtable;
-
-/** Count how many of each key we have; not thread safe */
-public class FrequencySet<T> extends Hashtable<T, MutableInt> {
-	public int count(T key) {
-		MutableInt value = get(key);
-		if (value == null) return 0;
-		return value.v;
-	}
-	public void add(T key) {
-		MutableInt value = get(key);
-		if (value == null) {
-			value = new MutableInt(1);
-			put(key, value);
-		}
-		else {
-			value.v++;
-		}
-	}
-}
-```
-
-```java
-package sampler;
-
-public class MutableInt extends Number implements Comparable<Number> {
-	public int v;
-
-	public MutableInt(int v) { this.v = v; }
-	@Override public int compareTo(Number o) { return v; }
-	@Override public int intValue() { return v; }
-	@Override public long longValue() { return v; }
-	@Override public float floatValue() { return v; }
-	@Override public double doubleValue() { return v; }
-
-	@Override
-	public String toString() {
-		return String.valueOf(v);
-	}
-}
-```

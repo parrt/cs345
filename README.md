@@ -43,10 +43,11 @@ Unfortunately the more useful book, [Language Implementation Patterns](http://am
 | Artifact | Grade Weight | Due date |
 |--------|--------|--------|
 |[Java REPL](https://github.com/parrt/cs652/blob/master/projects/Java-REPL.md)| 5%| Feb 4 |
-|[Java sampling and tracing profilers](projects/profilers.md)| 10%| Feb 4 |
-|[C declaration to English translator]() | 10% | |
+|[Regex]() | 10% | |
+|[C declaration to English translator]() | 5% | |
 |[malloc/free (C)]() | 10% | |
 |[Virtual Machine (C)]() | 10% | |
+|[Java sampling profiler](projects/profilers.md)| 5%| Feb 4 |
 |Quizzes | 5%| sporadic |
 |Exam 1| 15%| Mon, March 30 |
 |Exam 2| 15%| Wed, May 13 |
