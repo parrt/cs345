@@ -12,7 +12,7 @@ Students also study various programming paradigms such as: object-oriented progr
 
 I expect students to be familiar with C, Java, and Python as we will and implement projects with those languages and also study some of the nooks and crannies of those languages.
 
-## Requirements
+## Prerequisites
 
 CS245 is required background and is critical to the successful completion of the class. Undergraduates will have had Java and some Python (CS110) and C (CS220). Students must be comfortable with:
 
@@ -28,6 +28,21 @@ CS245 is required background and is critical to the successful completion of the
 
 **EXAMS.** There will be 2 exams and 1 final exam.
 
+### Projects
+
+| Artifact | Grade Weight | Due date |
+|--------|--------|--------|
+|[Java REPL](https://github.com/parrt/cs652/blob/master/projects/Java-REPL.md)| 5%| Feb 4 |
+|[Regex]() | 9% | |
+|[C declaration to English translator](projects/cdecl.md) | 3% | |
+|[TypeScript symbol table](projects/typescript) | 11% | |
+|[Virtual Machine (C)]() | 11% | |
+|[malloc/free (C)]() | 5% | |
+|Participation, Labs and Quizzes | 6%| sporadic |
+|Exam 1| 15%| Mon, March 30 |
+|Exam 2| 15%| Wed, May 13 |
+|Final exam| 20%| Thu, May 19 @ 12:30 PM-2:30 PM|
+
 ### Instruction Format
 
 Class periods of 1:45min each 2 times per week for 15 weeks. Instructor-student interaction during lecture is encouraged.
@@ -38,32 +53,29 @@ We will make heavy use of [Language Implementation Patterns](http://amzn.com/193
 
 Language Implementation Patterns is cheap at $24 in printed form. (A reminder that using an unpaid-for copy of the electronic version is uncool and violates our academic honesty policy and is illegal.)
 
-### Grading
+### Submitting Projects
 
-| Artifact | Grade Weight | Due date |
-|--------|--------|--------|
-|[Java REPL](https://github.com/parrt/cs652/blob/master/projects/Java-REPL.md)| 5%| Feb 4 |
-|[Regex]() | 10% | |
-|[C declaration to English translator](projects/cdecl.md) | 3% | |
-|[TypeScript symbol table](projects/typescript) | 11% | |
-|[Virtual Machine (C)]() | 11% | |
-|[malloc/free (C)]() | 5% | |
-|Participation, Labs and Quizzes | 5%| sporadic |
-|Exam 1| 15%| Mon, March 30 |
-|Exam 2| 15%| Wed, May 13 |
-|Final exam| 20%| Thu, May 19 @ 12:30 PM-2:30 PM|
+All projects are due precisely at the start of class on the due date. You do not need, say, two weeks and three minutes. My grading script will pull down the state of your repository at the time class starts.
 
-*I expect to see proper git commit messages and github usage so I can track your development.*
+For each project, I provide you with the complete set of tests your implementation must pass. Passing all tests as specified (i.e., don't modify them) gets you 90%. You get the other 10% after I sign off on your code. If there are changes to be made, I will submit a github *pull request* with comments inline in your code. Merge the pull request and then respond to each comment by fixing your code. Please remove my comments as you make changes.  Please try to submit all of your changes in a single commit beyond the last commit you did for original submission of the project.  Once you have fixed the code or if I did not require any changes, I will mark you down as 100%. Please email me when you have submitted your changes.   Be advised that I might require you to make multiple passes over your code to fix things until I'm satisfied.  **Any required changes must be done prior to submission of your next project or the last day of class, whichever comes first.**
+
+You must submit each project via github using your account and the repository I've created for you in organization [USF-CS345-S16](https://github.com/USF-CS345-S16). The repositories are always named `userid-projectname`. For example, my cdecl project would be `parrt-cdecl`.
+
+*I expect to see proper git commit messages and github usage so I can track your development.* Commits must be consistent with developing the software for each project. For example, a single large commit of the entire project at once could be considered circumstantial evidence of academic dishonesty.
+
+Unless you are sick or have a family emergency, I will not change deadlines for projects or exam times. For example, I will not give you a special final exam just because you want to fly home early. Consult the university academic calendar before making travel plans.
+
+### Grading standards
 
 I consider an "A" grade to be above and beyond what most students have achieved. A "B" grade is an average grade for a student or what you could call "competence" in a business setting. A "C" grade means that you either did not or could not put forth the effort to achieve competence. An "F" grade implies you did very little work or had great difficulty with the class compared to other students.
 
-Projects must run exactly as specified. Make sure that you do not have hardcoded files/directories in your code, remember that UNIX is case-sensitive as is Java, file names and class names must be correct, specified method signatures must be correct, etc...
+Projects must run exactly as specified.  To make things easier on you, each Java project has a maven build file and each C project has a CMake built file that automates compilation and testing of projects.  Make sure that you do not have hardcoded files/directories in your code, remember that UNIX is case-sensitive as is Java, file names and class names must be correct, specified method signatures must be correct, etc...
 
-Code quality counts. Even if you have perfect functionality, I will deduct points for poor and sloppy coding.
+Code quality and correctness counts.  I've seen projects that had no actual functionality but, instead, tested for the input and simply printed out the right answer. Such projects get a 0.
+
+The maximum score for perfect functionality is 90%. To get the remaining 10%, you must pass my code review per above. Github will notify you of a *pull request* if I want you to clean your code up.
 
 *I will be very strict and set a high standard in my grading*, but I will work hard to help you if you are having trouble. You some of you may not get the grade you were hoping for in this class, but I will do everything I can to make sure you learn a lot and have a satisfying educational experience!
-
-Unless you are sick or have a family emergency, I will not change deadlines for projects nor exam times. For example, I will not give you a special final exam just because you want to fly home early. Consult the university academic calendar before making travel plans.
 
 **ABOUT ME.** My name is Terence Parr and I’m a professor in the computer science department.  Please call me Terence or Professor (the use of “Terry” is a capital offense). For more information on me, see [http://parrt.cs.usfca.edu](http://parrt.cs.usfca.edu).
 
