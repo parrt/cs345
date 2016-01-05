@@ -51,6 +51,12 @@ To implement your translator, you will create a visitor with methods for each of
 
 Your individual visitor methods must augment and return the text computed for its child(ren). For example, in the visitor method that handles `*`, you just have to visit the `declarator` child and add string `pointer to` to its return value. See the ANTLR 4 reference for more on how the visitors work.
 
+As an exercise to learn more about ANTLR's handling of operator precedence, try moving the array and function alternatives last in rule `declarator`. The same input will give you a different tree and results in an incorrect translation to English. For example, `int *a[]` would get the following incorrect parse tree.
+
+<img src=images/array-ptrs-bad.png width=250>
+
+In this case, it shows doing the pointer operator first rather than the array operator.
+
 ### Building and testing
 
 The build assumes Java 8.
@@ -69,13 +75,13 @@ That stores the jar in the following location:
 ~/.m2/repository/edu/usfca/cs345/cdecl/1.0/cdecl-1.0.jar
 ```
 
-The main program is executed as follows from the commandline:
+The main program is executed as follows from the Mac commandline for my `parrt` user:
 
 ```bash
-$ java -cp ~/.m2/repository/edu/usfca/cs345/cdecl/1.0/cdecl-1.0.jar:$CLASSPATH \
+$ java -cp /Users/parrt/.m2/repository/edu/usfca/cs345/cdecl/1.0/cdecl-1.0.jar:$CLASSPATH \
   cs345.cdecl.Tool "int i;"
 i is a int
-$ java -cp ~/.m2/repository/edu/usfca/cs345/cdecl/1.0/cdecl-1.0.jar:$CLASSPATH \
+$ java -cp /Users/parrt/.m2/repository/edu/usfca/cs345/cdecl/1.0/cdecl-1.0.jar:$CLASSPATH \
   cs345.cdecl.Tool "int *a[];"
 a is a array of pointer to int
 ```
@@ -106,10 +112,10 @@ Tests run: 15, Failures: 0, Errors: 0, Skipped: 0
 
 ## Deliverables
 
-You must fill in `Tool.java` and `EnglishGenerator.java` to get a working solution that passes all [15 unit tests](https://github.com/USF-CS345-starterkits/parrt-cdecl/blob/master/test/cs345/cdecl/TestCDecl.java).  You get 90% for passing all the tests and the other 10% after I sign off on your code after review. I will submit a github *pull request* if there are changes to be made, otherwise I will simply mark you down as 100%. Any required changes must be done prior to submission of your next project or the last day of class, whichever comes first.
+You must fill in `Tool.java` and `EnglishGenerator.java` to get a working solution that passes all [15 unit tests](https://github.com/USF-CS345-starterkits/parrt-cdecl/blob/master/test/cs345/cdecl/TestCDecl.java).
 
 ## Submission
 
 You must submit your project via github using your account and the repository I've created for you in organization [USF-CS345-S16](https://github.com/USF-CS345-S16).
 
-You are required to show git commits to your repository that are consistent with developing the software for this project. For example, a single large commit of the entire project at once could be considered circumstantial evidence for academic dishonesty.
+You are required to show git commits to your repository that are consistent with developing the software for this project.
