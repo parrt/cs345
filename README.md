@@ -2,8 +2,6 @@
 
 The University of San Francisco; [Catalog entry](https://www.usfca.edu/catalog/course/prog-language-paradigms)
 
-*WARNING: Under construction*
-
 ## Abstract
 
 Because programming languages are at the core of how we communicate with machines, programmers should have a thorough understanding of how languages are designed, implemented, and manipulated. In this course, students learn to implement the key elements of programming languages such as virtual machine interpreters, type systems, symbol tables, memory allocation, garbage collection, and parsing.
