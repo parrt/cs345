@@ -31,11 +31,11 @@ CS245 is required background and is critical to the successful completion of the
 | Artifact | Grade Weight | Due date |
 |--------|--------|--------|
 |[Java REPL](https://github.com/parrt/cs652/blob/master/projects/Java-REPL.md)| 5%| Feb 4 |
-|[Regex]() | 9% | |
+|[Regex](projects/regex.md) | 9% | |
 |[C declaration to English translator](projects/cdecl.md) | 3% | |
-|[TypeScript symbol table](projects/typescript) | 11% | |
-|[Virtual Machine (C)]() | 11% | |
-|[malloc/free (C)]() | 5% | |
+|[TypeScript symbol table](projects/typescript.md) | 11% | |
+|[Virtual Machine (C)](projects/bytecode.md) | 11% | |
+|[malloc/free (C)](projects/malloc.md) | 5% | |
 |Participation, Labs and Quizzes | 6%| sporadic |
 |Exam 1| 15%| Mon, March 30 |
 |Exam 2| 15%| Wed, May 13 |
