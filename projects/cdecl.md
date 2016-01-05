@@ -1,4 +1,4 @@
-#Translating C declarations to English
+# Translating C declarations to English
 
 
 ## Goal
@@ -23,7 +23,7 @@ Before you panic, note that my solution to the translator itself has 9 lines of 
 
 Please study [How To Read C Declarations](http://blog.parr.us/2014/12/29/how-to-read-c-declarations/) carefully. The rules for understanding C declarations are actually quite simple.
 
-To implement this translator, we'll use ANTLR to parse a subset of C declaration syntax and then build a parse tree visitor that computes an appropriate English subphrase for each parse subtree. I have provided the grammar for you in [CDecl.g4](https://github.com/USF-CS345-starterkits/parrt-cdecl/blob/master/grammars/cs345/cdecl/CDecl.g4). The critical role is:
+To implement this translator, we'll use ANTLR to parse a subset of C declaration syntax and then build a parse tree visitor that computes an appropriate English subphrase for each parse subtree. I have provided the grammar for you in [CDecl.g4](https://github.com/USF-CS345-starterkits/parrt-cdecl/blob/master/grammars/cs345/cdecl/CDecl.g4). The critical rule is:
 
 ```
 declarator
@@ -59,12 +59,15 @@ In this case, it shows doing the pointer operator first rather than the array op
 
 ## Getting started
 
-I have provided a [starter kit](https://github.com/USF-CS345-starterkits/parrt-cdecl) that you can pull into your repository. From the command line, it looks like:
+I have provided a [starter kit](https://github.com/USF-CS345-starterkits/parrt-cdecl) that you can pull into your repository. From the command line, clone your project repo and then pull in my starter kit:
 
 ```bash
-$ cd userid-cdecl # jump into dir containing your empty repo
+$ git clone git@github.com:USF-CS345-S16/parrt-cdecl.git
+$ cd USERID-cdecl/ # jump into dir containing YOUR empty repo
 $ git pull git@github.com:USF-CS345-starterkits/parrt-cdecl.git master
 ```
+
+You can get any updates to the starter kit by simply `git pull`ing again from `USF-CS345-starterkits/parrt-cdecl.git`.
 
 ## Building and testing
 
@@ -118,6 +121,12 @@ Tests run: 15, Failures: 0, Errors: 0, Skipped: 0
 [INFO] Final Memory: 23M/310M
 [INFO] ------------------------------------------------------------------------
 ```
+
+Every time you commit to your repository, your software will automatically be downloaded and tested on the Travis continuous integration server using maven. Here is what a successful result looks like:
+
+<img src=images/travis-cdecl.png width=500>
+
+Check out [https://travis-ci.com/USF-CS345-S16/USERID-cdecl](https://travis-ci.com/USF-CS345-S16/USERID-cdecl) where USERID is your github user id. Mine is parrt, for example. You will not be able to see the repositories of other students.
 
 ## Deliverables
 
