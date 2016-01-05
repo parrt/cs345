@@ -34,9 +34,9 @@ Class periods of 1:45min each 2 times per week for 15 weeks. Instructor-student 
 
 ### Books
 
-There is no textbook required for this class, but you will find The ANTLR 4 reference book useful. It's free [online](http://0-proquest.safaribooksonline.com.ignacio.usfca.edu/book/programming/9781941222621) via USF’s “safari online” as part of your tuition. Log in via the USF library site.
+We will make heavy use of [Language Implementation Patterns](http://amzn.com/193435645X) and, to a lessor extent, [The ANTLR 4 reference book](http://0-proquest.safaribooksonline.com.ignacio.usfca.edu/book/programming/9781941222621) (free via USF’s “safari online” as part of your tuition. Log in via the USF library site.)
 
-Unfortunately the more useful book, [Language Implementation Patterns](http://amzn.com/193435645X), is not available for free (not sure why). It’s not required for CS345, but I will closely follow some of that book in class and it’s cheap at $24 in printed form. (A reminder that using an unpaid-for copy of the electronic version is uncool and violates our academic honesty policy and is illegal.)
+Language Implementation Patterns is cheap at $24 in printed form. (A reminder that using an unpaid-for copy of the electronic version is uncool and violates our academic honesty policy and is illegal.)
 
 ### Grading
 
@@ -44,11 +44,11 @@ Unfortunately the more useful book, [Language Implementation Patterns](http://am
 |--------|--------|--------|
 |[Java REPL](https://github.com/parrt/cs652/blob/master/projects/Java-REPL.md)| 5%| Feb 4 |
 |[Regex]() | 10% | |
-|[C declaration to English translator]() | 5% | |
-|[malloc/free (C)]() | 10% | |
-|[Virtual Machine (C)]() | 10% | |
-|[Java sampling profiler](projects/profilers.md)| 5%| Feb 4 |
-|Quizzes | 5%| sporadic |
+|[C declaration to English translator](projects/cdecl.md) | 3% | |
+|[TypeScript symbol table](projects/typescript) | 11% | |
+|[Virtual Machine (C)]() | 11% | |
+|[malloc/free (C)]() | 5% | |
+|Participation, Labs and Quizzes | 5%| sporadic |
 |Exam 1| 15%| Mon, March 30 |
 |Exam 2| 15%| Wed, May 13 |
 |Final exam| 20%| Thu, May 19 @ 12:30 PM-2:30 PM|
