@@ -5,7 +5,16 @@
 
 ## Getting started
 
-I have provided a [starter kit](https://github.com/USF-CS345-starterkits/parrt-regex) that you can pull into your repository. From the command line, it looks like:
+I have provided a [starter kit](https://github.com/USF-CS345-starterkits/parrt-regex) that you can pull into your repository. From the command line, clone your project repo and then pull in my starter kit:
+
+```bash
+$ git clone git@github.com:USF-CS345-S16/USERID-regex.git
+$ cd USERID-regex/ # jump into dir containing YOUR empty repo
+$ git pull git@github.com:USF-CS345-starterkits/parrt-regex.git master
+```
+
+You can get any updates to the starter kit by simply `git pull`ing again from `USF-CS345-starterkits/parrt-regex.git`.
+
 
 ```bash
 $ cd userid-regex # jump into dir containing your empty repo

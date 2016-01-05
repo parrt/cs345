@@ -62,7 +62,7 @@ In this case, it shows doing the pointer operator first rather than the array op
 I have provided a [starter kit](https://github.com/USF-CS345-starterkits/parrt-cdecl) that you can pull into your repository. From the command line, clone your project repo and then pull in my starter kit:
 
 ```bash
-$ git clone git@github.com:USF-CS345-S16/parrt-cdecl.git
+$ git clone git@github.com:USF-CS345-S16/USERID-cdecl.git
 $ cd USERID-cdecl/ # jump into dir containing YOUR empty repo
 $ git pull git@github.com:USF-CS345-starterkits/parrt-cdecl.git master
 ```
