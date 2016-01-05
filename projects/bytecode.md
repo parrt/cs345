@@ -3,7 +3,16 @@
 
 ## Discussion
 
-### Building and testing
+## Getting started
+
+I have provided a [starter kit](https://github.com/USF-CS345-starterkits/parrt-bytecode) that you can pull into your repository. From the command line, it looks like:
+
+```bash
+$ cd userid-bytecode # jump into dir containing your empty repo
+$ git pull git@github.com:USF-CS345-starterkits/parrt-bytecode.git master
+```
+
+## Building and testing
 
 The build assumes Java 8.
 

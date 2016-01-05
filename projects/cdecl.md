@@ -15,7 +15,7 @@ your translator must emit:
 a is a array of pointer to int
 ```
 
-You must fill in [Tool.java](https://github.com/USF-CS345-starterkits/parrt-cdecl/blob/master/src/cs345/cdecl/Tool.java) and the parse tree visitor[EnglishGenerator.java](https://github.com/USF-CS345-starterkits/parrt-cdecl/blob/master/src/cs345/cdecl/EnglishGenerator.java) in the starter kit.
+You must fill in [Tool.java](https://github.com/USF-CS345-starterkits/parrt-cdecl/blob/master/src/cs345/cdecl/Tool.java) and the parse tree visitor [EnglishGenerator.java](https://github.com/USF-CS345-starterkits/parrt-cdecl/blob/master/src/cs345/cdecl/EnglishGenerator.java) in the starter kit.
 
 Before you panic, note that my solution to the translator itself has 9 lines of Java code that I had to write myself. ANTLR and Intellij wrote the rest.  My solution for `Tool.java` has just 10 lines I had to write manually.
 
@@ -57,7 +57,16 @@ As an exercise to learn more about ANTLR's handling of operator precedence, try 
 
 In this case, it shows doing the pointer operator first rather than the array operator.
 
-### Building and testing
+## Getting started
+
+I have provided a [starter kit](https://github.com/USF-CS345-starterkits/parrt-cdecl) that you can pull into your repository. From the command line, it looks like:
+
+```bash
+$ cd userid-cdecl # jump into dir containing your empty repo
+$ git pull git@github.com:USF-CS345-starterkits/parrt-cdecl.git master
+```
+
+## Building and testing
 
 The build assumes Java 8.
 
