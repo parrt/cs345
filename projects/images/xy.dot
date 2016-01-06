@@ -1,0 +1,7 @@
+digraph nfa {
+  rankdir = LR;
+  node [shape = circle, height = 0.45, fontsize=18, fixedsize=true];
+  0 -> 1 [label="x", fontsize=18];
+  1 -> 2 [label="&epsilon;", fontsize=18];
+  2 -> 3 [label="y", fontsize=18];
+}

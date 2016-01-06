@@ -310,6 +310,8 @@ Every time you commit to your repository, your software will automatically be do
 
 ## Deliverables
 
+You must fill in the functions in `malloc.c` to get a working solution that passes all `test/test_*.c` tests.
+
 ## Submission
 
 You must submit your project via github using your account and the repository I've created for you in organization [USF-CS345-S16](https://github.com/USF-CS345-S16).
