@@ -17,6 +17,14 @@ You can get any updates to the starter kit by simply `git pull`ing again from `U
 
 ## Building and testing
 
+You might need to install `valgrind` and `cmake` on your system. If you are using a Mac, do this:
+
+```bash
+$ brew update
+$ brew install valgrind
+$ brew install cmake
+```
+
 I suggest that you use CLion, which knows how to deal with cmake builds. You can run the unit tests with a simple click. It should work on UNIX (including Mac) and Windows. It does not appear to use `valgrind` from within CLion.
 
 From the command line, you can build and test all of your software as follows on UNIX:
