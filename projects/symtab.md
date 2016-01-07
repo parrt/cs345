@@ -1,17 +1,14 @@
 # Building a symbol table for TypeScript
+
 ## Goal
+
+You will build a grammar for a subset of [TypeScript](http://www.typescriptlang.org/) (JavaScript with static types) and then populate a symbol table with classes, functions, and variable definitions.
 
 ## Discussion
 
 ## Getting started
 
-I have provided a [starter kit](https://github.com/USF-CS345-starterkits/parrt-symtab) that you can pull into your repository. From the command line, clone your project repo and then pull in my starter kit:
-
-```bash
-$ git clone git@github.com:USF-CS345-S16/USERID-symtab.git
-$ cd USERID-symtab/ # jump into dir containing YOUR empty repo
-$ git pull git@github.com:USF-CS345-starterkits/parrt-symtab.git master
-```
+I have provided a [starter kit](https://github.com/USF-CS345-starterkits/parrt-symtab) that you can pull into your repository.
 
 You can get any updates to the starter kit by simply `git pull`ing again from `USF-CS345-starterkits/parrt-symtab.git`.
 

@@ -61,7 +61,6 @@ Checking connectivity... done.
 $ cd USERID-regex
 $ git checkout -b master
 Switched to a new branch 'master'
-(reverse-i-search)`pull': git pull starterkit master
 $ git remote add starterkit git@github.com:USF-CS345-starterkits/parrt-malloc.git
 $ git pull starterkit master
 remote: Counting objects: 28, done.

@@ -1,7 +1,54 @@
 # Building a byte code interpreter
+
 ## Goal
 
+Your goal in this project is to create a bytecode interpreter, a virtual machine (VM), that acts like the assembly code for an imaginary processor.
+
 ## Discussion
+
+### Instruction set
+
+| Instruction | Semantics |
+|--------|--------|
+`HALT` | Stop the execution of the program
+`IADD` | y := pop, x := pop, push x+y
+`ISUB` | y := pop, x := pop, push x-y
+`IMUL` |y := pop, x := pop, push x*y
+`IDIV` |y := pop, x := pop, push x/y
+`SADD` |t := pop, s := pop, push stringcat s, t
+`OR` |y := pop, x := pop, push x or y
+`AND` |y := pop, x := pop, push x and y
+`INEG` |x := pop, push -x
+`NOT` |x := pop, push not x
+`I2S` |x := pop, push String.valueOf(x)
+`IEQ` |y := pop, x := pop, push x==y
+`INEQ` |y := pop, x := pop, push x!=y
+`ILT` |y := pop, x := pop, push x<y
+`ILE` |y := pop, x := pop, push x<=y
+`IGT` |y := pop, x := pop, push x>y
+`IGE` |y := pop, x := pop, push x>=y
+`SEQ` |t := pop, s := pop, push strcmp(s,t)=0
+`SNEQ` |t := pop, s := pop, push strcmp(s,t)!=0
+`SGT` |t := pop, s := pop, push strcmp(s,t)>0
+`SGE` |t := pop, s := pop, push s.equals(t)>=0
+`SLT` |t := pop, s := pop, push s.equals(t)<0
+`SLE` |t := pop, s := pop, push s.equals(t)<=0
+`BR a` | ip := a
+`BRF a` | b := pop, if b ip := a
+`ICONST x` | push x
+`SCONST i` | push strings[i]
+`LOAD i` | push frame.locals[i]
+`STORE i` | locals[i] = pop
+`SINDEX` | i := pop, s := pop, push s[i]
+`POP` | pop
+`CALL a,n` | frame := new call stack frame<br>frame.nargs := n<br>frame.retaddr := ip + 1 + 4 + 2<br>push frame on call stack<br>for i=n-1..0:<br>&nbsp;&nbsp; frame.locals[i] := pop<br>ip := a
+`LOCALS x` | frame.nlocals := x
+`RET` | x := pop, ip := frame.retaddr
+`PRINT` |
+`SLEN` |
+`SFREE i` |
+
+The stack operations are: `push x` is `stack[++sp] := x` and `pop` is `stack[sp--]`.  The same is true for call stack.
 
 ## Getting started
 
