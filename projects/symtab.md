@@ -88,6 +88,8 @@ def parameter x | define variable symbol in current scope
 
 One of the key ideas is to maintain a `currentScope` field within the listener object.
 
+*Do not worry about forward references to types or fields.*
+
 ### Referencing symbols
 
 In the definition phase, you have created all of the necessary scopes, annotated the parse tree with them, and to find all of the symbols. Now, let's perform operations to maintain the `currentScope` field by accessing the scopes annotating the parse tree created in the previous pass:
