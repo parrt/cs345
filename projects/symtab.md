@@ -179,20 +179,20 @@ $ mvn test
  T E S T S
 -------------------------------------------------------
 Running cs345.typescript.TestDefs
-Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.179 sec
-Running cs345.typescript.TestRefs
-Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 sec
+Tests run: 20, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.284 sec
+Running cs345.typescript.TestTypes
+Tests run: 20, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.035 sec
 
 Results :
 
-Tests run: 36, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 40, Failures: 0, Errors: 0, Skipped: 0
 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 2.639 s
-[INFO] Finished at: 2016-01-08T11:43:04-08:00
-[INFO] Final Memory: 22M/367M
+[INFO] Total time: 3.590 s
+[INFO] Finished at: 2016-01-09T12:09:38-08:00
+[INFO] Final Memory: 22M/248M
 [INFO] ------------------------------------------------------------------------
 ```
 
