@@ -6,7 +6,7 @@ Your goal is to build a grammar and symbol table for a subset of [TypeScript](ht
 
 ## Discussion
 
-There are three primary pieces: a grammar, a definition phase that walks the parse tree, and a reference phase. As an example, consider [class-inherit.ts](https://github.com/USF-CS345-starterkits/parrt-symtab/blob/master/samples/class-inherit.ts):
+There are three primary pieces: a grammar, a definition phase that walks the parse tree, and a type computation phase. As an example, consider [class-inherit.ts](https://github.com/USF-CS345-starterkits/parrt-symtab/blob/master/resources/samples/class-inherit.ts):
 
 ```TypeScript
 class Animal {
@@ -27,23 +27,47 @@ Your grammar should result in a parse tree that looks something like the followi
 <img src=images/typescript-classdef.png width=280>
 </center>
 
-Your definition phase will emit output according to [class-inherit.defs](https://github.com/USF-CS345-starterkits/parrt-symtab/blob/master/samples/class-inherit.defs):
+Your definition phase will emit output according to [class-inherit.defs](https://github.com/USF-CS345-starterkits/parrt-symtab/blob/master/resources/samples/class-inherit.defs):
 
 ```
 global
     Animal
-        Animal.name
+        <Animal.name:string>
     Horse
     Dog
-        Dog.breed
+        <Dog.breed:string>
 ```
 
-Your reference phase will emit output according to [class-inherit.refs](https://github.com/USF-CS345-starterkits/parrt-symtab/blob/master/samples/class-inherit.refs):
+Notice that the types are known at the definition site during this first phase. It is the type of expressions that we compute in the next phase. We know what the type of declarations are because they are explicitly typed.
+
+Your type computation phase will walk the parse tree again, setting the current scope as it descends by picking up the scope variable from the parse tree annotations. Let's take a look at another input example, [nested-field.ts](https://github.com/USF-CS345-starterkits/parrt-symtab/blob/master/resources/samples/nested-field.ts):
+
+```TypeScript
+class A {
+	x : number;
+}
+class B {
+	a : A;
+	f() {
+		this.a.x = 1;
+		a.x = 99;
+	}
+}
+```
+
+For each expression, such as the left and right hand side of assignments, the type computation phase must compute and annotate the tree with type information. The [expected output](https://github.com/USF-CS345-starterkits/parrt-symtab/blob/master/resources/samples/nested-field.types) identifies the type for each component of the expressions:
 
 ```
-5:20 class reference global.Animal
-8:18 class reference global.Animal
+1 is number
+this is B
+this.a is A
+this.a.x is number
+99 is number
+a is A
+a.x is number
 ```
+
+Your type of computation phase should analyze the right-hand side of an expression before the left-hand side, as you can see from the example.
 
 **You will use ANTLR's [antlr/symtab](https://github.com/antlr/symtab) symbol table library** to make your lives easier.
 
@@ -63,6 +87,18 @@ program returns [Scope scope] : sourceElement* EOF ;
 
 The parse tree node for `program` will have a `scope` field that you can set with `ctx.scope = ...;` from within a listener method where `ctx` is the listener method argument. Once you set this in the definitions phase, the references phase can set the current scope according to the value of that field.  For more information on this approach see the callout box in the ANTLR 4 reference manual called "Adding fields to nodes via rule arguments and return values."
 
+For the type computation phase, the parse tree for expressions should be annotated with a type pointer. For example, here's what my expression rule looks like:
+
+```
+expr returns [Type etype]
+	:	...
+	;
+```
+
+Expressions are identifiers, `this`, integers, string literals, function calls with argument lists, field references *expr*`.x`, field assignment, and regular assignment to identifier.
+
+Statements are blocks of code nested in curly braces, variable declarations, function declarations, or expressions followed by a semicolon.
+
 Your grammar should support both the line and block comments.
 
 ### Defining symbols and scopes
@@ -78,41 +114,43 @@ program exit | pop scope
 `class T` | create and define a class symbol, set ctx.scope, push scope
 `class T extends U` | Same as `class T` but set superclass to `U`
 exit class | pop scope
-method entry | define method, set `ctx.scope`, push scope
+method entry | define method with return type, set `ctx.scope`, push scope
 method exit | pop scope
 enter block | push local scope, set `ctx.scope`
  exit block | pop scope
-def field x | define field symbol in current scope
-def variable x | define variable symbol in current scope
-def parameter x | define variable symbol in current scope
+def field x | define field symbol in current scope, set type
+def variable x | define variable symbol in current scope, set type
+def parameter x | define variable symbol in current scope, set type
 
 One of the key ideas is to maintain a `currentScope` field within the listener object.
 
-*Do not worry about forward references to types or fields.*
+###  Type computation
 
-### Referencing symbols
+In the definition phase, you have created all of the necessary scopes, annotated the parse tree with them, and defined all of the symbols (and their explicit types). Now, we want to know the type of every expression.  To do this, we will use a visitor so that we can get return values and directly order in which the walk examines children.  
 
-In the definition phase, you have created all of the necessary scopes, annotated the parse tree with them, and to find all of the symbols. Now, let's perform operations to maintain the `currentScope` field by accessing the scopes annotating the parse tree created in the previous pass:
+An expression's type is typically recursively-defined based upon the type of the children. For example, the type of `a.b` is the type of `b` within the class (type) of `a`. First we visit the left side and get a type and then look inside that scope for field `b` and then ask for its type, which is stored with the symbol itself.
+
+To recoup the information about the current scope as computed by the previous phase, we perform operations to maintain a `currentScope` field:
  
-|Upon|Action(s)|
+|Upon visiting|Action(s)|
 |----|---------|
-program entry| set current scope to `ctx.scope`
-program exit | pop scope
-class entry | set current scope to `ctx.scope`
-exit class | pop scope
-method entry | set current scope to `ctx.scope`
-method exit | pop scope
-enter block | set current scope to `ctx.scope`
- exit block | pop scope
+program | visit children, set current scope to `ctx.scope`
+class | visit children, set current scope to `ctx.scope`
+method | visit children, set current scope to `ctx.scope`
+block | visit children, set current scope to `ctx.scope`
 
-In the same listener, we need to respond to references to identifiers:
+In the same visitor, we need to respond to all depression alternatives:
 
 |Upon|Action(s)|
 |----|---------|
-`class T extends U` | ref `U`
-`x = ...;` | ref `x`
-`... x ...` in expression | ref `x`
-`f(...)` | ref `f`
+`x` | resolve `x`, set `ctx.etype` and return type of `x`
+`123` |set `ctx.etype` and return `NUMBER_TYPE`
+`"hi"` |set `ctx.etype` and return `STRING_TYPE`
+`this` | set `ctx.etype` and return enclosing class scope
+`f(`*args*`)` | visit *args*, set `ctx.etype` and return `f`'s return type
+*e*`.b` | visit *e*, set `ctx.etype` and return type of `b` in *e*'s class scope
+*e*`.b = `*e* | visit *e*, print type of `b` in *e*'s class scope
+`x = `*e* | visit *e*, print `x`'s type
 
 ## Getting started
 
