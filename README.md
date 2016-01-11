@@ -1,4 +1,4 @@
-# CS345 Programming Languages
+# CS345 Programming Language Paradigms
 
 The University of San Francisco; [Catalog entry](https://www.usfca.edu/catalog/course/prog-language-paradigms)
 
