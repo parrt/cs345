@@ -26,7 +26,7 @@ CS245 is required background and is critical to the successful completion of the
 
 **EXAMS.** There will be 2 exams and 1 final exam.
 
-### Projects
+### Student evaluation
 
 | Artifact | Grade Weight | Due date |
 |--------|--------|--------|
