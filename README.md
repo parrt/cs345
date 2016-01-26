@@ -37,8 +37,8 @@ CS245 is required background and is critical to the successful completion of the
 |[Virtual Machine (C)](projects/bytecode.md) | 11% | |
 |[malloc/free (C)](projects/malloc.md) | 5% | |
 |Participation, Labs and Quizzes | 6%| sporadic |
-|Exam 1| 15%| Mon, March 30 |
-|Exam 2| 15%| Wed, May 13 |
+|Exam 1| 15%| Tue, March 1 |
+|Exam 2| 15%| Tue, April 5 |
 |Final exam| 20%| Thu, May 19 @ 12:30 PM-2:30 PM|
 
 ### Instruction Format
@@ -98,7 +98,7 @@ If you ever have questions about what constitutes plagiarism, cheating, or acade
 
 **ON DISABILITIES.** If you are a student with a disability or disabling condition, or if you think you may have a disability, please contact USF Student Disability Services (SDS) at 415/422-2613 within the first week of class, or immediately upon onset of the disability, to speak with a disability specialist. If you are determined eligible for reasonable accommodations, please meet with your disability specialist so they can arrange to have your accommodation letter sent to me, and we will discuss your needs for this course. For more information, please visit http://www.usfca.edu/sds/ or call 415/422-2613.
 
-## Syllabus
+# Syllabus
 
 ### Introduction
 
@@ -113,10 +113,11 @@ If you ever have questions about what constitutes plagiarism, cheating, or acade
  * general, scripting, DSLs, data languages
  * compiled, interpreted, static/dynamic typing, strong/weak typing
 
-PART I -- Static analysis
-<hr>
+Chapter 1 from Language Implementation Patterns (LIP)
 
-### Language recognition
+Chapter 2 in ANTLR 4 reference
+
+## PART I -- Language recognition
 
 * Lexical analysis
   * regex
@@ -132,9 +133,27 @@ PART I -- Static analysis
   * grammar classes; LL(k), LR(k), ALL(*)
 * Walking trees; listeners, visitors
 
+Chapter 2 on recursive-descent parsers in LIP
+
+Chapter 5 in ANTLR 4 reference on grammar patterns
+
+Parse Trees & ASTs. Section 4, 4.1, 4.2, and Pattern 8 in [Language Implementation Patterns](http://www.amazon.com/Language-Implementation-Patterns-Domain-Specific-Programming/dp/193435645X)
+
+Tree walkers, order. Section 5.1, 5.4, and Pattern 13 in [Language Implementation Patterns](http://www.amazon.com/Language-Implementation-Patterns-Domain-Specific-Programming/dp/193435645X)
+
+Section 2.5 in ANTLR 4 reference on Parse-Tree Listeners and Visitors
+
+Sections 7.2-7.4 Decoupling Grammars from Application-Specific Code in ANTLR 4 reference on Parse tree listeners/visitors.
+
+See grey box titled "Adding fields to nodes via rule arguments and return values" (rougly page 122).
+
+Read chapter 8 in ANTLR 4 ref on building real language applications as it contains examples of how to use listeners and visitors.
+
+
+## PART II -- Semantic analysis
+
 ### Type systems
 
-* Evolution
 * Common types: boolean, numerics, strings (unicode), aggregates, enums; memory layout
 * Object-oriented semantics
 	* classes, instances
@@ -156,8 +175,29 @@ PART I -- Static analysis
   * scope trees
   * [example](https://github.com/parrt/cs652/tree/master/lectures/code/symtab/src)
 
-PART II -- Runtime support
-<hr>
+Chapter 6 in Language Implementation Patterns (LIP)
+
+(ANTLR 4 ref Section 8.4 has a subsection called a "Crash course in symbol tables" that could also be a useful supplement to Chapter 6 in LIP book.)
+
+Chapter 7 in LIP: structs, classes
+
+Chapter 8 in LIP: type computation, promotion, type checking
+
+## PART III -- Virtual Machines
+
+* tree-based interpreters
+* bytecode machines
+   * memory models, constant pools
+   * instruction format
+   * stack machines
+   * register machines
+   * function call, args, return values
+
+Watch [How to build a virtual machine (video)](https://www.youtube.com/watch?v=OjaAToVkoTw&feature=youtu.be)
+
+Read Chapter 10 in Language implementation patterns. Study the difference between a stack and register machine. Particularly relevant to the Smalltalk project, you want to look at the section on *Storing large constants in the constant pool*. We do something similar with the `push_literal` bytecode.
+
+## PART IV -- Runtime support
 
 ### Memory management
 
@@ -168,16 +208,6 @@ PART II -- Runtime support
   * mark-and-sweep
   * mark-and-compact
   * generational
-
-### Virtual Machines
-
-* tree-based interpreters
-* bytecode machines
-   * memory models, constant pools
-   * instruction format
-   * stack machines
-   * register machines
-   * function call, args, return values
 
 ### Concurrency in Java
 
