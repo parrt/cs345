@@ -121,7 +121,9 @@ Chapter 2 in ANTLR 4 reference
 
 * Lexical analysis
   * regex
-  * NFA, DFA
+  * NFA, DFA;
+  * [Russ Cox on regex](https://swtch.com/~rsc/regexp/regexp1.html)
+  * [Python regex tester](http://pythex.org/)
 * Parsing
   * grammars (CFG, ANTLR)
   * syntax diagrams
