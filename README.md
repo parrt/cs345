@@ -32,7 +32,7 @@ CS245 is required background and is critical to the successful completion of the
 |--------|--------|--------|
 |[Java REPL](https://github.com/parrt/cs652/blob/master/projects/Java-REPL.md)| 5%| Tue, Feb 9 |
 |[Regex](projects/regex.md) | 9% | Tue, Feb 23 |
-|[C declaration to English translator](projects/cdecl.md) | 3% | |
+|[C declaration to English translator](projects/cdecl.md) | 3% | Tue, Mar 8 |
 |[TypeScript symbol table](projects/symtab.md) | 11% | |
 |[Virtual Machine (C)](projects/bytecode.md) | 11% | |
 |[malloc/free (C)](projects/malloc.md) | 5% | |
