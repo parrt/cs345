@@ -38,7 +38,7 @@ global
         <Dog.breed:string>
 ```
 
-Notice that the types are known at the definition site during this first phase. It is the type of expressions that we compute in the next phase. We know what the type of declarations are because they are explicitly typed.
+Notice that the field types are known at the definition site during this first phase *because we do not allow forward references*. It is the type of expressions that we compute in the next phase. We know what the type of declarations are because they are explicitly (and statically) typed.
 
 Your type computation phase will walk the parse tree again, setting the current scope as it descends by picking up the scope variable from the parse tree annotations. Let's take a look at another input example, [nested-field.ts](https://github.com/USF-CS345-starterkits/parrt-symtab/blob/master/resources/samples/nested-field.ts):
 
@@ -100,6 +100,10 @@ Expressions are identifiers, `this`, integers, string literals, function calls w
 Statements are blocks of code nested in curly braces, variable declarations, function declarations, or expressions followed by a semicolon.
 
 Your grammar should support both the line and block comments.
+
+To help you out, here is what my parse tree looks like for nested-field.ts:
+
+<img src="images/nested-field.png" width=500>
 
 ### Defining symbols and scopes
 
