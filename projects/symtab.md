@@ -202,7 +202,7 @@ Tests run: 40, Failures: 0, Errors: 0, Skipped: 0
 
 ## Deliverables
 
-You must complete the [TypeScript.g4](https://github.com/USF-CS345-starterkits/parrt-symtab/blob/master/grammars/cs345/typescript/TypeScript.g4) grammar and [DefScopesAndSymbols](https://github.com/USF-CS345-starterkits/parrt-symtab/blob/master/src/cs345/typescript/DefScopesAndSymbols.java), [RefSymbols](https://github.com/USF-CS345-starterkits/parrt-symtab/blob/master/src/cs345/typescript/RefSymbols.java) parse tree walks.
+You must complete the [TypeScript.g4](https://github.com/USF-CS345-starterkits/parrt-symtab/blob/master/grammars/cs345/typescript/TypeScript.g4) grammar and [DefScopesAndSymbols](https://github.com/USF-CS345-starterkits/parrt-symtab/blob/master/src/cs345/typescript/DefScopesAndSymbols.java), [ComputeTypes](https://github.com/USF-CS345-starterkits/parrt-symtab/blob/master/src/cs345/typescript/ComputeTypes.java) parse tree walks.
 
 **You are specifically allowed to copy and paste from any existing grammar you find on the net as long as you attribute where you got it from. You may not copy from fellow students, current or previous!**
 
