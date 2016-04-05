@@ -34,11 +34,11 @@ CS245 is required background and is critical to the successful completion of the
 |[Regex](projects/regex.md) | 9% | Tue, Feb 23 |
 |[C declaration to English translator](projects/cdecl.md) | 3% | Tue, Mar 8 |
 |[TypeScript symbol table](projects/symtab.md) | 11% | Thu, Apr 7 |
-|[Virtual Machine (C)](projects/bytecode.md) | 11% | Tue, Apr 26 |
+|[Virtual Machine (C)](projects/bytecode.md) | 11% | Thu, Apr 28 |
 |[malloc/free (C)](projects/malloc.md) | 5% | |
 |Participation, Labs and Quizzes | 6%| sporadic |
 |Exam 1| 15%| Tue, March 1 |
-|Exam 2| 15%| Tue, April 12 |
+|Exam 2| 15%| Thu, April 14 |
 |Final exam| 20%| Thu, May 19 @ 12:30 PM-2:30 PM|
 
 ### Instruction Format
