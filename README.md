@@ -197,7 +197,7 @@ Chapter 8 in LIP: type computation, promotion, type checking
 
 Watch [How to build a virtual machine (video)](https://www.youtube.com/watch?v=OjaAToVkoTw&feature=youtu.be)
 
-Read Chapter 10 in Language implementation patterns. Study the difference between a stack and register machine. Particularly relevant to the Smalltalk project, you want to look at the section on *Storing large constants in the constant pool*. We do something similar with the `push_literal` bytecode.
+Read Chapter 10 in Language implementation patterns. Study the difference between a stack and register machine. 
 
 ## PART IV -- Runtime support
 
