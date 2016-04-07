@@ -30,7 +30,7 @@ In order to load programs from the disk, I have defined a kind of assembly code 
 	HALT
 ```
 
-If we want to print the string literal, the assembly file format requires you to define the string and then reference it with `SCONST i` instruction. For example,
+If we want to print a string literal, the assembly file format requires you to define the string and then reference it with `SCONST i` instruction. For example,
 
 ```
 1 strings
@@ -43,21 +43,21 @@ If we want to print the string literal, the assembly file format requires you to
 	HALT
 ```
 
-This program has a memory leak because `SCONST` it creates a `String` `struct` from the `strings[0]` literal stored in the virtual machine by the loader. To free that we have to store it in a local variable and then manually free it before halting:
+This program has a memory leak because `SCONST` creates a `String` `struct` from the `strings[0]` literal stored in the virtual machine by the loader. To free that we have to store it in a local variable and then manually free it before halting:
 
 ```
 1 strings
-   0: 5/hello
+    0: 5/hello
 1 functions maxaddr=0\n"
-	0: 4/main
+    0: 4/main
 7 instr, 17 bytes
-	LOCALS 1		// make space for one local variable
-	SCONST 0		// push a String from strings[0]
-	STORE 0		// store the string in the first local variable
-	LOAD 0			// push it back on the stack
-	PRINT			// now we can finally print it
-	SFREE 0		// ok, free the string at locals[0]
-	HALT			// later, dude
+    LOCALS 1    // make space for one local variable
+    SCONST 0    // push a String from strings[0]
+    STORE 0     // store the string in the first local variable
+    LOAD 0      // push it back on the stack
+    PRINT       // now we can finally print it
+    SFREE 0     // ok, free the string at locals[0]
+    HALT        // later, dude
 ```
 
 You should look carefully through the unit tests [test_core.c](https://github.com/USF-CS345-starterkits/parrt-bytecode/blob/master/test/test_core.c) and [test_funcs.c](https://github.com/USF-CS345-starterkits/parrt-bytecode/blob/master/test/test_funcs.c). Unit tests are a bit of executable documentation that describes the operation of the virtual machine.
@@ -66,11 +66,11 @@ You should look carefully through the unit tests [test_core.c](https://github.co
 
 The VM has three native types:
 
-* integers (C `int`)
-* strings (C struct `String`)
-* boolean (C `int`) (this type is only used internally; you cannot push true or false onto the stack manually, for example)
+* integers (C type `int`)
+* strings (C type struct `String`)
+* boolean (C type `int`) (this type is only used internally; you cannot push true or false onto the stack manually, for example)
 
-Local variables and the operand stack are tagged with type information. Each such "slot" is there for two pieces of information: the type and the value. To allow the same memory cell to hold an `int`, `bool`, or `String *` we need to use a `union` in C:
+Local variables and the operand stack are tagged with type information. Each such "slot" therefore has two pieces of information: the type and the value. To allow the same memory cell to hold an `int`, `bool`, or `String *` we need to use a `union` in C:
 
 ```C
 typedef struct {
@@ -95,7 +95,7 @@ and the local variable array within a function call activation record is defined
 element locals[MAX_LOCALS];
 ```
 
-You should take a look at [vm.h](), which has all of these definitions created for you. You're welcome.
+You should take a look at [vm.h](https://github.com/USF-CS345-starterkits/parrt-bytecode/blob/master/src/vm.h), which has all of these definitions created for you. You're welcome.
 
 Instructions are stored in byte-addressable code memory and some of the instructions take operands from code memory rather than the operand stack. For example, *push 3* is encoded as `ICONST 3` where the `3` appears as a four byte integer directly after the byte representing the `ICONST` instruction. 
 
@@ -220,9 +220,6 @@ I suggest that you use CLion, which knows how to deal with cmake builds. You can
 
 From the command line, you can build and test all of your software as follows on UNIX:
 
-
-From the command line, you can build and test all of your software as follows on UNIX:
-
 ```bash
 $ cmake CMakeLists.txt
 ...
@@ -293,7 +290,7 @@ $ ctest -V | more
 
 ## Deliverables
 
-You must fill in the functions that are blank, but the primary one of course is the `vm_exec()` function. You must pass all unit tests, and of course `valgrind` not find any memory leaks or memory errors.
+You must fill in the functions that are blank, but the primary one of course is the `vm_exec()` function. You must pass all unit tests, and of course `valgrind` should not find any memory leaks or memory errors.
 
 ## Submission
 
