@@ -18,7 +18,7 @@ Here's a complete program that prints 1234:
 
 The `PRINT` instruction pops the top element off the operand stack and (as we will see later) it prints the element according to the type of tag of the top operand.
 
-In order to load programs from the desk, I have defined a kind of assembly code format that specifies how many strings are used, where the functions are, and then the actual bytecodes. As loaded by [loader.c](https://github.com/USF-CS345-starterkits/parrt-bytecode/blob/master/src/loader.c) we have:
+In order to load programs from the disk, I have defined a kind of assembly code format that specifies how many strings are used, where the functions are, and then the actual bytecodes. As loaded by [loader.c](https://github.com/USF-CS345-starterkits/parrt-bytecode/blob/master/src/loader.c) we have:
 
 ```
 0 strings
