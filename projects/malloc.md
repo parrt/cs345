@@ -23,7 +23,9 @@ typedef struct _Busy_Header {
 
 The `struct` allows us to indicate that we want a 32-bit (`uint32_t`) integer stored at the start of any chunk allocated via our `malloc()`. Given an arbitrary pointer, `p`, from our heap, expression `p->size` tells us how big that chunk is.
 
-Because we need to add these chunks to a linked list, we actually need the usual `next` pointer stored in the header as well.
+The `size` field lets `free(p)` know how big the chunk to free is at `p`.
+
+Because we need to add these chunks to a linked list when free, we actually need the usual `next` pointer stored in the header as well.
 
 ```C
 typedef struct _Free_Header {
@@ -38,9 +40,9 @@ So, a free header is bigger than a busy (allocated) header. That's why you see o
 static const size_t MIN_CHUNK_SIZE = sizeof(Free_Header);
 ```
 
-When we `free()` a chunk, `p`, we need to access that `p->next` field to link it into the free list. A chunk of requested size 0 would still need to allocate the minimum header size, `sizeof(Free_Header)`. All chunks are at least the size.
+When we `free()` a chunk, `p`, we need to access that `p->next` field to link it into the free list. A chunk of requested size 0 would still need to allocate the minimum header size, `sizeof(Free_Header)`. All chunks are at least that size.
 
-We don't want to waste space however so we don't just add `sizeof(Free_Header)` to the requested size, say, `n`. First, we tried to get away with `n + sizeof(Busy_Header)`, which is smaller than `n + sizeof(Free_Header)`. If `n + sizeof(Busy_Header)` and smaller than the minimum chunk size, then we create a chunk of the minimum size, `sizeof(Free_Header)`. This is codified in the following function.
+We don't want to waste space however so we don't just add `sizeof(Free_Header)` to the requested size, say, `n`. First, we try to get away with `n + sizeof(Busy_Header)`, which is always smaller than `n + sizeof(Free_Header)`. If `n + sizeof(Busy_Header)` is smaller than the minimum chunk size, then we create a chunk of the minimum size, `sizeof(Free_Header)`. This is codified in the following function.
 
 ```C
 /* Pad size n to include header */
@@ -49,16 +51,19 @@ static inline size_t size_with_header(size_t n) {
 }
 ```
 
-For efficiency reasons or even to make things work out right depending on the underlying memory architecture, we need to return a pointer from `malloc` that is word aligned. For a 64-bit word, as most of our machines have today, that means we need to return a pointer ending with 3 binary zeroes: `0b....000`.  Because we're going to return `&p->mem` for chunk `p` from `malloc`, we need to make sure that our header is padded so `mem` starts on a word boundary. Here is the alignment kung fu:
+For efficiency reasons or even to make things work out right depending on the underlying memory architecture, we need to return a pointer from `malloc` that is *word aligned*. For a 64-bit word, as most of our machines have today, that means we need to return a pointer ending with 3 binary zeroes: `0b....000`.  Because we're going to return `&p->mem` for chunk `p` from `malloc`, we need to make sure that our header is padded so `mem` starts on a word boundary. Here is the alignment kung fu:
 
 ```C
+static const size_t WORD_SIZE_IN_BYTES = sizeof(void *); // 4 or 8
+static const size_t ALIGN_MASK = WORD_SIZE_IN_BYTES - 1; // ~3 or ~7
+
 /* Align n to nearest word size boundary (4 or 8) */
 static inline size_t align_to_word_boundary(size_t n) {
 	return (n & ALIGN_MASK) == 0 ? n : (n + WORD_SIZE_IN_BYTES) & ~ALIGN_MASK;
 }
 ```
 
-With a word size of 8 (64 bits), we use a bitmask of 7 to examine the lowest three binary digits.  If we `&` (bitwise AND) `n` with 7 and get 0, that means there were no bits and `n` is already word aligned. If not, we can add 8 bytes to `n` and then mask off the lowest three bits by ANDing with `~0x7` or `~0b333`. The following table makes it easier to visualize what's going on. For any given pointer, `p`, we first add 8 and then mask. The value in the right column is the word aligned pointer value. This was computed with [showsizes.c](https://github.com/USF-CS345-starterkits/parrt-malloc/blob/master/src/showsizes.c) from your starter kit.
+With a word size of 8 (64 bits), we use a bitmask of 7 to examine the lowest three binary digits.  If we `&` (bitwise AND) `n` with 7 and get 0, that means there were no low bits and `n` is already word aligned. If not, we can add 8 bytes to `n` and then mask off the lowest three bits by ANDing with `~0x7` or `~0b111`. The following table makes it easier to visualize what's going on. The value in the right column is the word aligned size value. This was computed with [showsizes.c](https://github.com/USF-CS345-starterkits/parrt-malloc/blob/master/src/showsizes.c) from your starter kit.
 
 | n | n&0x7 | n+8| (n+8) & ~0x7 | (n&0x7)==0 ? n : (n+8) & ~0x7|
 |---|-------|----|--------------|----------------------------|
@@ -189,7 +194,7 @@ Getting that information correct is critical to unit testing.
 
 Aside from a few obvious manual tests that call your memory allocation and free routines, what's a good way to test your functions in a realistic environment? Well, one way is to link your `malloc()` and `free()` into some C program that you have or that you find on the net.  That is exactly the kind of real test we want but it presents challenges from a testing perspective. We want a test that doesn't require us to install another piece of software nor get its configuration correct.
 
-I downloaded a nice piece of C software ([dparser](http://dparser.sourceforge.net/)) and instrumented the memory allocation by defining macros for `malloc()` and `free()` that made them instead call my routines. These routines printed a logging message and then delegated to the real C library routines. The output, if you look in `test/MALLOC_FREE_TRACE.trace` is a big file full of the following messages:
+I downloaded a nice piece of C software ([dparser](http://dparser.sourceforge.net/)) and instrumented the memory allocation by defining macros for `malloc()` and `free()` that made them first call my tracing routines. These routines printed a logging message and then delegated to the real C library routines. The output, if you look in `test/MALLOC_FREE_TRACE.trace` is a big file full of the following messages:
 
 ```
 malloc 952 -> 0
